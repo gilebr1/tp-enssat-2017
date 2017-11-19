@@ -1,4 +1,6 @@
 <resources>
     <string name="app_name">Mon application</string>
     <string name="titre">Hello Lannion!</string>
+    <string name="message">Entrez un message</string>
+    <string name="titre_bouton">ENVOYER</string>
 </resources>
