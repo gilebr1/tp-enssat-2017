@@ -6,3 +6,5 @@ de MainActivity.java
 
 Pour la gestion du build, regardez les commentaires du build.gradle de l'app.
 
+Happy coding.
+
