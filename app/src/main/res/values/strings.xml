@@ -1,6 +1,4 @@
 <resources>
-    <string name="app_name">2017_TP1</string>
-    <string name="titre">Hello Lannion!</string>
-    <string name="message">Entrez un message</string>
-    <string name="titre_bouton">ENVOYER</string>
+    <string name="app_name">2017_TP2</string>
+
 </resources>
