@@ -1,16 +1,27 @@
+//plugin android nécessaire pour builder des app android
 apply plugin: 'com.android.application'
 
-apply plugin: 'kotlin-android'
-
-apply plugin: 'kotlin-android-extensions'
-
+//configuration du plugin android pour votre projet android
 android {
+
+    //compiler avec le compilateur android utilisant la version 26 du sdk android
+    //toujours essayé de compiler avec la deniere version du sdk android
     compileSdkVersion 26
+
+    //outils android utilisé lors de la compilation  - attention il doit etre compatible avec compileSdkVersion
+    //pour connaitre les versions dèjà installées: voir Tools > Android > SDK Manager onglet SDKPlatform et SDKTools
     buildToolsVersion "26.0.1"
+
     defaultConfig {
         applicationId "fr.enssat.identifiantbinome.monapplication"
+
+        //version minimale de compatibilité de votre application, induit une dépendance vers les librairies de retro compatibilité android de type appcompat
+        //le parc mondial android en fonction des niveaux d'api: https://developer.android.com/about/dashboards/index.html
         minSdkVersion 14
+
+        //au runtime comportement attendu de l'app selon version du SDK, dans la majorité des cas il vaut mieux avoir un targetSDK = compileSDK
         targetSdkVersion 26
+
         versionCode 1
         versionName "1.0"
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
@@ -23,12 +34,12 @@ android {
     }
 }
 
+//dépendances vers des librairies nécessaires à votre projet android
 dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.1', {
         exclude group: 'com.android.support', module: 'support-annotations'
     })
-    implementation "org.jetbrains.kotlin:kotlin-stdlib-jre7:$kotlin_version"
     implementation 'com.android.support:appcompat-v7:26.1.0'
     testImplementation 'junit:junit:4.12'
     implementation 'com.android.support.constraint:constraint-layout:1.0.2'
