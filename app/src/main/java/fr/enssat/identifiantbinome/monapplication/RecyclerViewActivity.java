@@ -22,6 +22,7 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.Charset;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
@@ -110,6 +111,8 @@ public class RecyclerViewActivity extends AppCompatActivity implements AdapterVi
                         data.getStringExtra(NewPersonActivity.DATE_PERSONNE+i))
                     );
                 }
+                Collections.sort(_listePersonnes, new PersonneComparator());
+
                 _recyclerAdapter.notifyDataSetChanged();
             }
 
