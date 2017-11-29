@@ -1,4 +1,13 @@
 <resources>
     <string name="app_name">2017_TP2</string>
+    <string name="app_add">Ajouter</string>
+    <string name="app_title">Personne</string>
+    <string name="app_date">JJ/MM/AAAA</string>
+    <string name="app_nom">Nom ? </string>
+    <string name="app_delete">supprimer %1$s de la liste ?</string>
+    <string name="app_error_1">activity for result en erreur</string>
+    <string name="app_title_person">nom de la personne</string>
+    <string name="app_title_date">date de naissance</string>
+    <string name="app_bt_set">Définir</string>
 
 </resources>
