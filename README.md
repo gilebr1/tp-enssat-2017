@@ -6,13 +6,14 @@ Pour avoir la correction d'un TP quelconque, choisissez la branche correspondant
 $>git branch -r
 $>git checkout nomdelabranche  
 
-Si vous voulez recupérer le TP1:
+Si vous voulez recupérer le TP1 ou TP2:
 $>git branch -r
 $>git checkout TP1
-
-Si vous voulez recupérer le TP2 par défaut sur le master:
-$>git branch -r
 $>git checkout TP2
+
+Si vous voulez recupérer le TP3 par défaut sur le master:
+$>git branch -r
+$>git checkout TP3
 
 
 Happy coding.
