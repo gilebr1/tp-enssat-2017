@@ -16,12 +16,4 @@ public class Personne {
     protected String getNaissance() {
         return _naissance;
     }
-
-    protected void setNom(String nom) {
-        _nom = nom;
-    }
-
-    protected void setNaissance(String naissance) {
-        _naissance = naissance;
-    }
- }
+  }

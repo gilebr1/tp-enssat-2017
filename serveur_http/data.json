@@ -1,0 +1,19 @@
+{
+   
+   "personnes":[
+      {
+         "nom":"Paco de Lucia",
+         "date":"21/12/1947"
+      },
+
+      {
+         "nom":"Frank Zappa",
+         "date":"21/12/1940"
+      },
+
+      {
+         "nom":"Angus Young",
+         "date":"31/03/1955"
+      }
+   ]
+}

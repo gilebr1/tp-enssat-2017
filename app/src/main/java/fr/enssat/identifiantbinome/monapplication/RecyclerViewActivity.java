@@ -1,19 +1,15 @@
 package fr.enssat.identifiantbinome.monapplication;
 
 import android.content.Context;
-import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
-import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.AdapterView;
 import android.widget.Toast;
 
 import java.io.BufferedReader;
@@ -26,7 +22,7 @@ import java.util.Collections;
 import java.util.List;
 import java.util.StringTokenizer;
 
-public class RecyclerViewActivity extends AppCompatActivity implements AdapterView.OnItemClickListener
+public class RecyclerViewActivity extends AppCompatActivity implements AsyncResponseListener
 {
     protected int REQUEST_CODE_TO_MATCH = 1234;
 
@@ -37,15 +33,16 @@ public class RecyclerViewActivity extends AppCompatActivity implements AdapterVi
     protected void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
         this.setContentView(R.layout.activity_recycler_view);
+        final RecyclerViewActivity me = this;
 
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
         // cellules comme une ListView
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
 
-        //cellules avec un gridlayout, 3 cellues par ligne
+        //cellules avec un gridlayout, 3 cellules par ligne
         //recyclerView.setLayoutManager(new GridLayoutManager(this,3));
 
-        final RecyclerViewActivity me = this;
+
         FloatingActionButton fab = findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener()
         {
@@ -70,8 +67,14 @@ public class RecyclerViewActivity extends AppCompatActivity implements AdapterVi
         }
 
         //creation du list adapter avec la liste initiale de personnes
-        _recyclerAdapter = new RecyclerViewAdapter(_listePersonnes);
+        _recyclerAdapter = new RecyclerViewAdapter(this);
         recyclerView.setAdapter(_recyclerAdapter);
+
+        // Utilisation d'une interface asyncResponse pour obtenir la liste de contacts json
+        // Invocation de l'asynctask:
+        //    en parametre du constructeur l'interface asyncResponse pour obtenir la liste de contacts json
+        //    en parametre du execute l'url du fichier json parametre du doInBackground
+        new HttpAsyncTask(this).execute("http://192.168.43.53:8000/data.json");
     }
 
     //creation du menu avec le bouton ajouter
@@ -122,29 +125,16 @@ public class RecyclerViewActivity extends AppCompatActivity implements AdapterVi
         }
     }
 
-    //suppression de personne sur click d'un element de la liste
     @Override
-    public void onItemClick(AdapterView<?> parent, View view, int position, long id)
-    {   AlertDialog dialog;
-        AlertDialog.Builder alertDialogBuilder = new AlertDialog.Builder(this);
-        final int pos = position;
+    public Context getContext()
+    { return this;}
 
-        String button_ok  = this.getString(android.R.string.ok);
-        String message    = this.getString(R.string.app_delete,_listePersonnes.get(position).getNom());
-        String button_cancel = this.getString(android.R.string.cancel);
-
-        alertDialogBuilder.setMessage(message);
-        alertDialogBuilder.setCancelable(true);
-        alertDialogBuilder.setNegativeButton(button_cancel, null);
-        alertDialogBuilder.setPositiveButton(button_ok, new DialogInterface.OnClickListener()
-        {   @Override
-            public void onClick(DialogInterface dialog, int which)
-            {   _listePersonnes.remove(pos);
-                _recyclerAdapter.notifyDataSetChanged();
-            }
-        });
-
-        dialog = alertDialogBuilder.create();
-        dialog.show();
+    @Override
+    public void onAsyncTaskResponse(List<Personne> liste)
+    {   _listePersonnes.addAll(liste);
+        _recyclerAdapter.notifyDataSetChanged();
     }
+
+    protected List<Personne> getListePersonnes()
+    {   return _listePersonnes;}
 }
